@@ -1,0 +1,33 @@
+React Hooks Used in Seat-N-Read
+=================================
+
+This document explains the core React hooks utilized in the Seat-N-Read frontend application and their specific purposes within the project.
+
+1. useState()
+-------------
+What it does: Allows functional components to manage local state (variables that trigger a re-render when they change).
+How it's used in this project:
+- Managing form inputs: In `Login.js` and `Register.js`, it tracks the user's keystrokes for `email`, `password`, and `name`.
+- Storing fetched data: In `BookSeat.js`, it holds arrays of available `seats` and `rooms` fetched from the backend, as well as the user's `myBookings`.
+- Tracking selections: It keeps track of the currently selected resource (`selectedResource`) and time slot (`timeSlot`) when a user is making a booking.
+
+2. useEffect()
+--------------
+What it does: Handles "side effects" in functional components, such as data fetching, setting up subscriptions, or manually changing the DOM. It runs after the component renders.
+How it's used in this project:
+- Data Fetching on Load: In pages like `AdminDashboard.js`, `BookSeat.js`, and `RequestBook.js`, `useEffect` is passed an empty dependency array `[]`. This tells React to run the fetching functions (`fetchStats`, `fetchResources`) exactly once when the page first loads.
+- Authentication Persistence: In `AuthContext.js`, `useEffect` checks the browser's `localStorage` to see if a valid user token already exists when the application first starts, preventing the user from being logged out on refresh.
+
+3. useContext()
+---------------
+What it does: Allows components to subscribe to React context without introducing nesting. It provides a way to pass data through the component tree without having to pass props down manually at every level.
+How it's used in this project:
+- Global State Access: The `AuthContext` provides global authentication state (`user`, `login`, `logout`). Components like `Navbar.js` use `useContext(AuthContext)` to display the user's name or show specific links (like the "Admin" link) based on the user's role, without needing those values passed directly from `App.js`.
+- Protecting Routes: In `App.js`, the `ProtectedRoute` wrapper component uses `useContext` to check if a `user` exists before allowing access to private pages like `/book-seat`.
+
+4. useNavigate()
+----------------
+What it does: A custom hook provided by React Router (`react-router-dom`) that allows you to programmatically navigate the user to different routes in the application.
+How it's used in this project:
+- Redirects after actions: In `Login.js`, after a successful login API call, `navigate('/')` sends the user to the home page.
+- Logout handling: In `Navbar.js`, when the user clicks the "Logout" button, it clears their session and uses `navigate('/login')` to return them to the login screen.
