@@ -122,11 +122,3 @@ cd "ET PROJECT"
    * Backend: Middleware (`verifyToken` & `verifyAdmin`) protects endpoints on the server.
 
 ---
-
-## 🎓 Academic Credentials
-
-*   **Student Name:** Biswa Prachurjya
-*   **Branch & Section:** CST(A-1)
-*   **Roll No:** 11
-*   **SIC:** 23BCTC51
-*   **Institution:** Silicon University
